@@ -89,7 +89,7 @@ if __name__ != "__main__":
     db.create_table()
 
 if __name__ == "__main__":
-    db = ProjectsDb("projects.db")
+    db = ProjectsDb("test.db")
     db.drop_projects()
     db.create_table()
     db.add_project('first project', "2020-11-23", "2020-12-27")
