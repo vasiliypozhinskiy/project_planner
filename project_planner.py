@@ -1,4 +1,4 @@
-import sys
+import sys, os
 import calendar
 import datetime
 from PyQt5 import QtWidgets, QtGui, QtCore
@@ -26,7 +26,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super().__init__()
 
         self.setupUi(self)
-        self.setFixedSize(1220, 600)
+        self.setFixedSize(1220, 538)
         self.setWindowTitle("Project planner")
         self.color = QtGui.QColor(255, 170, 170)
         self.weekend_color = QtGui.QColor(255, 0, 0)
@@ -44,7 +44,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.combo_status = create_combo_status_widget()
 
         self.start_date_widget = QtWidgets.QDateEdit()
+        self.start_date_widget.setDate(datetime.date.today())
         self.finish_date_widget = QtWidgets.QDateEdit()
+        self.finish_date_widget.setDate(datetime.date.today())
         self.start_date_widget.setCalendarPopup(True)
         self.finish_date_widget.setCalendarPopup(True)
 
@@ -279,6 +281,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             while self.check_for_empty_space(project):
                 pass
 
+    def wheelEvent(self, event):
+        current_pos = self.graphicsView.horizontalScrollBar().sliderPosition()
+        if event.angleDelta().y() > 0:
+            self.graphicsView.horizontalScrollBar().setSliderPosition(current_pos - 50)
+        else:
+            self.graphicsView.horizontalScrollBar().setSliderPosition(current_pos + 50)
 
 class TimelineScene(QtWidgets.QGraphicsScene):
     itemClicked = QtCore.pyqtSignal(object)
@@ -302,7 +310,9 @@ class AddProjectWindow(QtWidgets.QDialog, Ui_Add_project):
         self.setLocale(Config.LOCALE)
 
         self.start_date_widget = QtWidgets.QDateEdit()
+        self.start_date_widget.setDate(datetime.date.today())
         self.finish_date_widget = QtWidgets.QDateEdit()
+        self.finish_date_widget.setDate(datetime.date.today())
         self.start_date_widget.setCalendarPopup(True)
         self.finish_date_widget.setCalendarPopup(True)
         self.start_date_widget.setDate(datetime.date.today())
@@ -327,6 +337,9 @@ class AddProjectWindow(QtWidgets.QDialog, Ui_Add_project):
             new_project_item = ProjectItem(id_, name, start_date, finish_date, color)
             window.projects.append(new_project_item)
             window.add_project_item(new_project_item)
+            self.tableWidget.item(0, 0).setText("Type here")
+            self.start_date_widget.setDate(datetime.date.today())
+            self.finish_date_widget.setDate(datetime.date.today())
             self.close()
 
 

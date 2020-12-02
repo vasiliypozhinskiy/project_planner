@@ -2,12 +2,12 @@ from PyQt5 import QtGui, QtCore
 
 
 class Config:
-    SCALE_WIDTH = 70
+    SCALE_WIDTH = 40
     SCALE_HEIGHT = 20
     LINE_HEIGHT = 36
-    MAX_LINES = 8
-    MAIN_FONT = QtGui.QFont("Roboto", 12, 400)
-    MAIN_FONT.setPixelSize(16)
+    MAX_LINES = 9
+    MAIN_FONT = QtGui.QFont("Cambria", 12, 400)
+    MAIN_FONT.setPixelSize(12)
 
     LOCALE = QtCore.QLocale(QtCore.QLocale.English)
 
