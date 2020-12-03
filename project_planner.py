@@ -56,6 +56,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget.setColumnWidth(2, 120)
         self.tableWidget.setColumnWidth(3, 100)
         self.tableWidget.setColumnWidth(4, 120)
+        self.tableWidget.horizontalHeader().setFixedHeight(30)
+        self.tableWidget.setRowHeight(0, 39)
+        self.tableWidget.setFixedHeight(69)
+
 
         self.tableWidget.setCellWidget(0, 1, self.start_date_widget)
         self.tableWidget.setCellWidget(0, 2, self.finish_date_widget)
@@ -305,6 +309,9 @@ class AddProjectWindow(QtWidgets.QDialog, Ui_Add_project):
         self.tableWidget.setColumnWidth(2, 120)
         self.tableWidget.setColumnWidth(3, 100)
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.tableWidget.horizontalHeader().setFixedHeight(30)
+        self.tableWidget.setRowHeight(0, 39)
+        self.tableWidget.setFixedHeight(69)
 
         self.setFont(Config.MAIN_FONT)
         self.setLocale(Config.LOCALE)
