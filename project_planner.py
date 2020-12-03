@@ -304,6 +304,7 @@ class AddProjectWindow(QtWidgets.QDialog, Ui_Add_project):
         super().__init__()
         self.setupUi(self)
         self.setFixedSize(828, 116)
+        self.setWindowTitle("Add project")
         self.tableWidget.setColumnWidth(0, 440)
         self.tableWidget.setColumnWidth(1, 120)
         self.tableWidget.setColumnWidth(2, 120)
