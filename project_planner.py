@@ -1,4 +1,5 @@
-import sys, os
+import locale
+import sys
 import calendar
 import datetime
 from PyQt5 import QtWidgets, QtGui, QtCore
@@ -11,6 +12,8 @@ from timeline import Timeline
 from database import db
 from models import ProjectItem, create_project_items, update_project_items
 from custom_widgets import ComboColor
+
+
 
 
 def create_combo_status_widget():
@@ -32,7 +35,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.weekend_color = QtGui.QColor(255, 0, 0)
         self.font = Config.MAIN_FONT
         self.setFont(self.font)
+
         self.setLocale(Config.LOCALE)
+        try:
+            locale.setlocale(locale.LC_ALL, 'en_US.utf8')
+        except locale.Error:
+            locale.setlocale(locale.LC_ALL, "")
+
         self.header_height = Config.SCALE_HEIGHT + 2 * self.font.pixelSize()
         self.header_offset = 10
 
@@ -59,7 +68,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget.horizontalHeader().setFixedHeight(30)
         self.tableWidget.setRowHeight(0, 39)
         self.tableWidget.setFixedHeight(69)
-
 
         self.tableWidget.setCellWidget(0, 1, self.start_date_widget)
         self.tableWidget.setCellWidget(0, 2, self.finish_date_widget)
@@ -291,6 +299,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.graphicsView.horizontalScrollBar().setSliderPosition(current_pos - 50)
         else:
             self.graphicsView.horizontalScrollBar().setSliderPosition(current_pos + 50)
+
 
 class TimelineScene(QtWidgets.QGraphicsScene):
     itemClicked = QtCore.pyqtSignal(object)
