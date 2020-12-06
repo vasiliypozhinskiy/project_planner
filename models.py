@@ -29,7 +29,7 @@ class ProjectItem(QtWidgets.QGraphicsItem):
         self.setZValue(10)
 
         self.project_name = project_name
-        self.font = Config.MAIN_FONT
+        self.font = QtGui.QFont(Config.MAIN_FONT, 12, 400)
         self.font.setPixelSize(16)
 
         self.text_options = QtGui.QTextOption(QtCore.Qt.AlignCenter)

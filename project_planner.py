@@ -14,8 +14,6 @@ from models import ProjectItem, create_project_items, update_project_items
 from custom_widgets import ComboColor
 
 
-
-
 def create_combo_status_widget():
     combo_status = QtWidgets.QComboBox()
     combo_status.addItem("In progress")
@@ -33,7 +31,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowTitle("Project planner")
         self.color = QtGui.QColor(255, 170, 170)
         self.weekend_color = QtGui.QColor(255, 0, 0)
-        self.font = Config.MAIN_FONT
+        self.font = QtGui.QFont(Config.MAIN_FONT, 12, 400)
+        self.font.setPixelSize(12)
         self.setFont(self.font)
 
         self.setLocale(Config.LOCALE)
@@ -262,9 +261,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     earliest_date = project.start_date
                 if last_date < project.finish_date:
                     last_date = project.finish_date
-                if earliest_date > self.dates[0] or last_date < self.dates[-1]:
-                    self.graphicsView_reset()
-                    return
+            if earliest_date > self.dates[0] or last_date < self.dates[-1]:
+                self.graphicsView_reset()
+            return
         elif len(self.dates) > 28:
             self.graphicsView_reset()
             return
@@ -323,7 +322,7 @@ class AddProjectWindow(QtWidgets.QDialog, Ui_Add_project):
         self.tableWidget.setRowHeight(0, 39)
         self.tableWidget.setFixedHeight(69)
 
-        self.setFont(Config.MAIN_FONT)
+        self.setFont(QtGui.QFont(Config.MAIN_FONT, 12, 400))
         self.setLocale(Config.LOCALE)
 
         self.start_date_widget = QtWidgets.QDateEdit()

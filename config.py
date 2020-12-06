@@ -6,8 +6,7 @@ class Config:
     SCALE_HEIGHT = 20
     LINE_HEIGHT = 36
     MAX_LINES = 9
-    MAIN_FONT = QtGui.QFont("Cambria", 12, 400)
-    MAIN_FONT.setPixelSize(12)
+    MAIN_FONT = "Cambria"
 
     LOCALE = QtCore.QLocale(QtCore.QLocale.English)
 
